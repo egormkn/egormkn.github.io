@@ -1,10 +1,57 @@
 [//]: # (/usr/local/bin/prince cv.html -o cv.pdf --media=screen --page-size=A4 --page-margin="7mm 0mm 0mm 0mm" --css-dpi=115)
 
-[//]: # (<style type="text/css">.ui-toc.hidden-print{display:none!important}.markdown-body{max-width:840px}.markdown-body .photo{float:left;margin:25px 25px 0 0!important;border:1px solid #CCC}.markdown-body table:first-of-type{display:table;width:auto}.markdown-body table:first-of-type tr{border:0;background:0 0!important}.markdown-body table:first-of-type th{border:0;padding-left:0;font-weight:400}.markdown-body table:first-of-type th:first-of-type{border:0;width:270px;padding-left:0;font-weight:400}.markdown-body table tbody tr{background:0 0!important}.markdown-body table thead tr{background:#f8f8f8}.markdown-body ul{padding-left:20px!important;margin-left:20px!important}</style>)
+<style>
+    .ui-toc.hidden-print {
+        display: none !important;
+    }
+    .markdown-body {
+        max-width: 840px;    
+    } 
+    .markdown-body .photo {
+        float: left; 
+        margin: 25px 25px 0px 0px !important; 
+        border: 1px solid #CCC;
+    }
+    .markdown-body table:first-of-type {
+        display: table;
+        width: auto;
+    }
+    .markdown-body table:first-of-type tr {
+        border: 0px;
+        background: transparent !important;
+    }
+    .markdown-body table:first-of-type th {
+        border: 0px;
+        padding-left: 0px;
+        font-weight: normal;
+    }
+    .markdown-body table:first-of-type th:first-of-type {
+        border: 0px;
+        width: 270px;
+        padding-left: 0px;
+        font-weight: normal;
+    }
+    .markdown-body table tbody tr {
+        background: transparent !important;
+    }
+    .markdown-body table thead tr {
+        background: #f8f8f8;
+    }
+    .markdown-body ul {
+        padding-left: 20px !important;
+        margin-left: 20px !important;
+    }
+    .markdown-body h1:first-of-type {
+        padding-bottom: 4px;
+        margin-bottom: 6px !important;
+    }
+</style>
 
 <img src="http://egormkn.github.io/photo.png" height="170" class="photo">
 
 # Макаренко Егор Алексеевич
+
+<span>Программист С++</span>
 
 |<i class="fa fa-map-marker fa-fw fa-lg text-info" aria-hidden="true"></i>&nbsp;Санкт-Петербург<br><i class="fa fa-envelope fa-fw fa-lg text-info" aria-hidden="true"></i>&nbsp;[egormkn@yandex.ru](mailto:egormkn@yandex.ru) <br> <i class="fa fa-phone fa-fw fa-lg text-info" aria-hidden="true"></i>&nbsp;+7 (999) 203-83-35 | <i class="fa fa-telegram fa-fw fa-lg text-primary" aria-hidden="true"></i>&nbsp;[t.me/egormkn](https://t.me/egormkn)  <br><i class="fa fa-vk fa-fw fa-lg text-info" aria-hidden="true"></i>&nbsp;[vk.com/egormkn](https://vk.com/egormkn)<br><i class="fa fa-github fa-fw fa-lg" aria-hidden="true"></i>&nbsp;[github.com/egormkn](https://github.com/egormkn) |
 |---|---|
