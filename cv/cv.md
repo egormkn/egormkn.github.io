@@ -1,7 +1,7 @@
 [//]: # (/usr/local/bin/prince cv.html -o cv.pdf --media=screen --page-size=A4 --page-margin="7mm 0mm 0mm 0mm" --css-dpi=115)
 
 <style>
-    .ui-toc.hidden-print {
+    .ui-toc.hidden-print, .ui-affix-toc.hidden-print {
         display: none !important;
     }
     .markdown-body {
@@ -51,7 +51,7 @@
 
 # Макаренко Егор Алексеевич
 
-<span>Программист С++</span>
+<span>Программист</span>
 
 |<i class="fa fa-map-marker fa-fw fa-lg text-info" aria-hidden="true"></i>&nbsp;Санкт-Петербург<br><i class="fa fa-envelope fa-fw fa-lg text-info" aria-hidden="true"></i>&nbsp;[egormkn@yandex.ru](mailto:egormkn@yandex.ru) <br> <i class="fa fa-phone fa-fw fa-lg text-info" aria-hidden="true"></i>&nbsp;+7 (999) 203-83-35 | <i class="fa fa-telegram fa-fw fa-lg text-primary" aria-hidden="true"></i>&nbsp;[t.me/egormkn](https://t.me/egormkn)  <br><i class="fa fa-vk fa-fw fa-lg text-info" aria-hidden="true"></i>&nbsp;[vk.com/egormkn](https://vk.com/egormkn)<br><i class="fa fa-github fa-fw fa-lg" aria-hidden="true"></i>&nbsp;[github.com/egormkn](https://github.com/egormkn) |
 |---|---|
@@ -68,7 +68,7 @@
 ## <i class="fa fa-file-code-o fa-fw text-info" aria-hidden="true"></i> Навыки и умения
 
 * Языки программирования: C/C++, Java, JavaScript
-* Знакомство c x86 Assembly, Perl, Clojure, OCaml
+* Знакомство c x86 Assembly, Python, Perl, Clojure, OCaml
 * Знания алгоритмов и структур данных
 * Опыт работы с Linux, Git, CMake
 * Опыт разработки Android-приложений
@@ -78,12 +78,12 @@
 
 ## <i class="fa fa-folder-open fa-fw text-info" aria-hidden="true"></i> Проекты
 
-* [SDLXX](https://github.com/egormkn/SDLXX) -- небольшой кроссплатформенный 2D движок на C++ с использованием библиотек SDL2, Box2D.
+* [SDLXX](https://github.com/egormkn/SDLXX) -- небольшой кроссплатформенный 2D движок на C++ с использованием библиотек SDL2, Box2D, с поддержкой загрузки карт формата TMX.
 * [MBR Boot Manager](https://github.com/egormkn/MBR-Boot-Manager) -- менеджер загрузки для таблицы разделов MBR с возможностью выбора загрузочного раздела. Написан на ассемблере.
-* [WalletPad](https://github.com/egormkn/WalletPad) -- менеджер финансов под Android для записи доходов и расходов и учёта статистики. Для хранения и синхронизации данных используется Firebase.
-* [ifmo-kt](https://github.com/egormkn/ifmo-kt) -- репозиторий с моими решениями задач по курсам дискретной математики, алгоритмов и структур данных.
+* [WalletPad](https://github.com/egormkn/WalletPad) -- менеджер финансов под Android для записи доходов и расходов и учёта статистики. Для хранения и синхронизации данных используется база данных Firebase.
+* [ifmo-kt](https://github.com/egormkn/ifmo-kt) -- репозиторий с моими решениями задач олимпиадного формата по&nbsp;курсам дискретной математики, алгоритмов и структур данных.
 
 
 ## <i class="fa fa-user fa-fw text-info" aria-hidden="true"></i> О себе
 
-Трудолюбивый, неконфликтный, ответственный, готов работать с большими объёмами информации, изучать новые языки и технологии. В планах -- изучение Qt, Python, технологий машинного обучения и компьютерного зрения. 
+Трудолюбивый, неконфликтный, ответственный, готов работать с большими объёмами информации, изучать новые языки и технологии. В планах -- изучение Python, Qt, технологий машинного обучения и компьютерного зрения.
