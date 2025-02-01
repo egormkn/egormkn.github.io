@@ -7,7 +7,15 @@ const config = {
   importOrder: ["^@/(.*)$", "^[./].*(?<!\\.(?:c|sc|sa)ss)$", "^[./].*(?<=\\.(?:c|sc|sa)ss)$"],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-  tailwindFunctions: ["clsx"]
+  tailwindFunctions: ["clsx"],
+  overrides: [
+    {
+      files: "*.json",
+      options: {
+        trailingComma: "none",
+      },
+    },
+  ],
 };
 
 export default config;
