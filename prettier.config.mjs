@@ -7,6 +7,7 @@ const config = {
   importOrder: ["^@/(.*)$", "^[./].*(?<!\\.(?:c|sc|sa)ss)$", "^[./].*(?<=\\.(?:c|sc|sa)ss)$"],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
+  tailwindFunctions: ["clsx"]
 };
 
 export default config;
