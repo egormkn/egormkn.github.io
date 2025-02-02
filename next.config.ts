@@ -7,6 +7,9 @@ const withNextra = nextra({
 
 const nextConfig: NextConfig = {
   output: "export",
+  images: {
+    unoptimized: true, // mandatory, otherwise won't export
+  },
   distDir: "out",
 };
 
