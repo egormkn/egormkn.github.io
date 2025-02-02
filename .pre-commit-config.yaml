@@ -1,0 +1,53 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+default_install_hook_types: [pre-commit, commit-msg]
+default_stages: [pre-commit]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-json
+        exclude: ^\.devcontainer/devcontainer\.json$
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+        exclude_types: [svg]
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+        args: [--fix=no]
+      - id: name-tests-test
+        args: [--pytest-test-first]
+
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.17.0
+    hooks:
+      - id: commitizen
+
+  - repo: local
+    hooks:
+      - id: next-lint
+        name: next lint
+        language: system
+        entry: node scripts/next-lint.mjs
+        files: \.([cm]?[jt]s|[jt]sx)$
+      - id: stylelint
+        name: stylelint
+        language: system
+        entry: npx --no -- stylelint --fix
+        files: \.(css|scss|sass)$
+      - id: prettier
+        name: prettier
+        language: system
+        entry: npx --no -- prettier --write --ignore-unknown
+        types: [text]
