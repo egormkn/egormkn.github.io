@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Footer, Layout, Navbar, ThemeSwitch } from "nextra-theme-blog";
-import "nextra-theme-blog/style.css";
 import { Banner, Head, Search } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 
-// import "@/styles/globals.css";
+import "@/styles/globals.css";
 
 import { geistMono, geistSans } from "./fonts";
 
