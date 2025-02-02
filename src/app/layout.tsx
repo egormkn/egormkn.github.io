@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-import { geistMono, geistSans } from "./fonts";
-
 import "@/styles/globals.css";
+
+import { geistMono, geistSans } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,11 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
     </html>
   );
 }
