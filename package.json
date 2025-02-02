@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:style": "stylelint --fix \"**/*.{css,scss,sass}\"",
+    "lint:style": "stylelint --fix \"src/**/*.{css,scss,sass}\"",
     "format": "prettier --write --ignore-unknown ."
   },
   "dependencies": {

@@ -19,6 +19,7 @@ const stylelintConfig = {
       true,
       { ignoreAtRules: [ ...tailwindAtRules ] },
     ],
+    "import-notation": "string"
   },
 };
 
