@@ -8,7 +8,15 @@ const config = {
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
   tailwindStylesheet: "./src/app/globals.css",
-  tailwindFunctions: ["clsx"]
+  tailwindFunctions: ["clsx"],
+  overrides: [
+    {
+      files: "*.json",
+      options: {
+        trailingComma: "none",
+      },
+    },
+  ],
 };
 
 export default config;
