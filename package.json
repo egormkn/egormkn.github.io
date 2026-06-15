@@ -38,5 +38,6 @@
     "stylelint-config-standard": "^40.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "browserslist": "> 1%"
 }
