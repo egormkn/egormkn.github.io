@@ -1,6 +1,12 @@
-/** @type {import("prettier").Config & import('prettier-plugin-tailwindcss').PluginOptions} */
+/** @type {import("prettier").Config & import('prettier-plugin-tailwindcss').PluginOptions & import('@trivago/prettier-plugin-sort-imports').PluginConfig} */
 const config = {
-  plugins: ["prettier-plugin-tailwindcss"],
+  plugins: [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  importOrder: ["^@/(.*)$", "^[./].*(?<!\\.(?:c|sc|sa)ss)$", "^[./].*(?<=\\.(?:c|sc|sa)ss)$"],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
   tailwindStylesheet: "./src/app/globals.css"
 };
 
