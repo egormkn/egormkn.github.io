@@ -2,4 +2,8 @@
 
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
-@plugin "daisyui";
+@plugin "daisyui" {
+  prefix: daisy-;
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));

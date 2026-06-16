@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
+import { ThemeProvider } from 'next-themes'
 
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
 
 import { geistMono, geistSans } from "../../fonts";
+import Header from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,9 +25,9 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
   }
 
   return (
-    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="flex min-h-full flex-col">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider><ThemeProvider><Header />{children}</ThemeProvider></NextIntlClientProvider>
       </body>
     </html>
   );
