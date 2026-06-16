@@ -1,11 +1,12 @@
-'use client' // Error boundaries must be Client Components
+"use client"; // Error boundaries must be Client Components
 
 export default function GlobalError({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   error,
   unstable_retry,
 }: {
-  error: Error & { digest?: string }
-  unstable_retry: () => void
+  error: Error & { digest?: string };
+  unstable_retry: () => void;
 }) {
   return (
     <html>
@@ -14,5 +15,5 @@ export default function GlobalError({
         <button onClick={() => unstable_retry()}>Try again</button>
       </body>
     </html>
-  )
+  );
 }

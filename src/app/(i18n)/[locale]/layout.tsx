@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { geistSans, geistMono } from "../../fonts";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { notFound } from "next/navigation";
+
+import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
 
-import {hasLocale, NextIntlClientProvider} from 'next-intl';
-import {notFound} from 'next/navigation';
-import {routing} from '@/i18n/routing';
+import { geistMono, geistSans } from "../../fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,24 +13,18 @@ export const metadata: Metadata = {
 };
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({locale}));
+  return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function RootLayout({
-  children,
-  params,
-}: LayoutProps<'/[locale]'>) {
-  const { locale } = await params
+export default async function RootLayout({ children, params }: LayoutProps<"/[locale]">) {
+  const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
   return (
-    <html
-      lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
+    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>
