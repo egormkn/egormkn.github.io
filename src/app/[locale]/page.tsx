@@ -1,8 +1,23 @@
 import Image from "next/image";
+import {useTranslations} from 'next-intl';
+
+// import {getTranslations} from 'next-intl/server';
+
+// export async function generateMetadata({params}: PageProps<'/[locale]'>) {
+//   const {locale} = await params;
+//   const t = await getTranslations({locale, namespace: 'Metadata'});
+
+//   return {
+//     title: t('title')
+//   };
+// }
 
 export default function Home() {
+  const t = useTranslations('HomePage');
+
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <h1>{t('title')}</h1>
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
