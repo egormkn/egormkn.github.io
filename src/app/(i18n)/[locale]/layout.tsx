@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { geistSans, geistMono } from "../fonts";
+import { geistSans, geistMono } from "../../fonts";
 import "@/styles/globals.css";
 
 import {hasLocale, NextIntlClientProvider} from 'next-intl';
