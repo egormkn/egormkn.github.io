@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   experimental: {
     rootParams: true,
     globalNotFound: true,
+    viewTransition: true,
   },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };

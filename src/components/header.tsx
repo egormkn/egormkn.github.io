@@ -1,75 +1,71 @@
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
+
 import LocaleSwitcher from "@/components/locale-switcher";
 import ThemeSwitcher from "@/components/theme-switcher";
+import { Link } from "@/i18n/navigation";
 
+import HeaderHomeLink from "./header-home-link";
+
+function Menu({
+  type,
+  className,
+  ...props
+}: { type: "horizontal" | "vertical" } & React.HTMLAttributes<HTMLUListElement>) {
+  const t = useTranslations("Menu");
+
+  return (
+    <ul className={className} {...props}>
+      {type === "vertical" && (
+        <li>
+          <Link href="/">{t("home")}</Link>
+        </li>
+      )}
+      <li>
+        <Link href="/blog">{t("blog")}</Link>
+      </li>
+      <li>
+        <Link href="/projects">{t("projects")}</Link>
+      </li>
+      <li>
+        <Link href="/resume">{t("resume")}</Link>
+      </li>
+      <li>
+        <Link href="/about">{t("about")}</Link>
+      </li>
+    </ul>
+  );
+}
 
 export default function Header() {
   return (
     <div className="daisy-navbar bg-base-100 shadow-sm">
       <div className="daisy-navbar-start">
-        <div className="daisy-dropdown">
-          <div tabIndex={0} role="button" className="daisy-btn daisy-btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {" "}
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />{" "}
-            </svg>
-          </div>
-          <ul
-            tabIndex={-1}
-            className="daisy-dropdown-content daisy-menu z-1 mt-3 w-52 daisy-menu-sm rounded-box bg-base-100 p-2 shadow"
+        <div className="group daisy-dropdown lg:hidden">
+          <div
+            tabIndex={0}
+            role="button"
+            className="daisy-btn daisy-swap daisy-btn-square daisy-swap-rotate group-focus-within:daisy-swap-active"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
+            <FontAwesomeIcon className="daisy-swap-off group-focus-within:-rotate-45" icon={faBars} size="lg" />
+            <FontAwesomeIcon className="daisy-swap-on group-focus-within:rotate-none" icon={faXmark} size="lg" />
+          </div>
+          <Menu
+            type="vertical"
+            tabIndex={-1}
+            className="daisy-dropdown-content daisy-menu z-1 w-52 rounded-box bg-base-100 p-2 shadow-sm"
+          />
         </div>
-        <a className="daisy-btn text-xl daisy-btn-ghost">daisyUI</a>
+
+        <HeaderHomeLink />
       </div>
       <div className="daisy-navbar-center hidden lg:flex">
-        <ul className="daisy-menu daisy-menu-horizontal px-1">
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="z-1 w-40 bg-base-100 p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
-        </ul>
+        <Menu type="horizontal" className="daisy-menu daisy-menu-horizontal px-1" />
       </div>
-      <div className="daisy-navbar-end">
-        <LocaleSwitcher />
+      <div className="daisy-navbar-end gap-1">
         <ThemeSwitcher />
+        <LocaleSwitcher />
       </div>
     </div>
   );

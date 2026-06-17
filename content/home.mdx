@@ -1,0 +1,15 @@
+---
+title: My MDX Page
+---
+
+import { useTranslations } from "next-intl"
+import { ViewTransition } from 'react'
+
+
+export const Name = () => {
+  const t = useTranslations('Main');
+
+  return <>{t("name")}</>;
+};
+
+# <ViewTransition name="name" share="morph"><span><Name /></span></ViewTransition>

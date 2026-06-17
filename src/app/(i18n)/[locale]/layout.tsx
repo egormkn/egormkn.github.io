@@ -6,7 +6,7 @@ import { ThemeProvider } from 'next-themes'
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
 
-import { geistMono, geistSans } from "../../fonts";
+import { geistMono, geistSans } from "@/app/fonts";
 import Header from "@/components/header";
 
 export const metadata: Metadata = {

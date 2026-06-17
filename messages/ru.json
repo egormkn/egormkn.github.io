@@ -1,9 +1,21 @@
 {
-  "HomePage": {
-    "title": "Привет, мир!"
+  "Main": {
+    "name": "Егор Макаренко"
+  },
+  "Menu": {
+    "home": "Главная",
+    "blog": "Блог",
+    "projects": "Проекты",
+    "resume": "Резюме",
+    "about": "Обо мне"
   },
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, ru {Russian} en {English} other {Unknown}}"
+  },
+  "NotFound": {
+    "title": "Страница не найдена",
+    "back": "Назад",
+    "home": "На главную"
   }
 }

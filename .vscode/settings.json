@@ -4,6 +4,6 @@
     "*.css": "tailwindcss"
   },
   "files.exclude": {
-    "src/app/(default)/blog": true,
+    "src/app/(default)/{blog,projects,resume,about}": false,
   }
 }

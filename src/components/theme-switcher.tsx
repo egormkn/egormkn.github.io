@@ -14,21 +14,21 @@ const ThemeSwitcher = () => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
-
   return (
-    <label className="daisy-btn daisy-swap daisy-swap-rotate">
-      <input
-        type="checkbox"
-        className="invisible"
-        checked={resolvedTheme === "dark"}
-        onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
-      />
+    <label className="daisy-btn daisy-swap daisy-btn-square daisy-swap-rotate">
+      {mounted && (
+        <>
+          <input
+            type="checkbox"
+            className="invisible"
+            checked={resolvedTheme === "dark"}
+            onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
+          />
 
-      <FontAwesomeIcon className="daisy-swap-on" icon={faMoon} size="lg" />
-      <FontAwesomeIcon className="daisy-swap-off" icon={faSun} size="lg" />
+          <FontAwesomeIcon className="daisy-swap-on" icon={faMoon} size="lg" />
+          <FontAwesomeIcon className="daisy-swap-off" icon={faSun} size="lg" />
+        </>
+      )}
     </label>
   );
 };

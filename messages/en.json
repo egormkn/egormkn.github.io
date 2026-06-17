@@ -1,9 +1,21 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
+  "Main": {
+    "name": "Egor Makarenko"
+  },
+  "Menu": {
+    "home": "Home",
+    "blog": "Blog",
+    "projects": "Projects",
+    "resume": "Resume",
+    "about": "About me"
   },
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, ru {Russian} en {English} other {Unknown}}"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "back": "Back",
+    "home": "Home"
   }
 }
