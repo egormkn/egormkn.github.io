@@ -20,6 +20,7 @@ export default function LocaleSwitcher() {
   const params = useParams();
 
   function onSetLocale(nextLocale: Locale) {
+    console.log(`pathname: ${pathname}, params: ${JSON.stringify(params)}, nextLocale: ${nextLocale}`);
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`

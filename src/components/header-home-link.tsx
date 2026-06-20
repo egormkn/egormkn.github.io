@@ -13,7 +13,9 @@ export default function HeaderHomeLink() {
 
   return (
     <Link href="/" className="daisy-btn text-xl daisy-btn-ghost">
-      <ViewTransition name="name" share="morph"><span>{t("name")}</span></ViewTransition>
+      <ViewTransition name="name" share="morph">
+        <span>{t("name")}</span>
+      </ViewTransition>
     </Link>
   );
 }

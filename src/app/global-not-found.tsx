@@ -1,10 +1,7 @@
-// Import global styles and fonts
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 
-import "@/styles/globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import Header from "@/components/header";
+import RootLayout from "@/components/root-layout";
 
 export const metadata: Metadata = {
   title: "404 - Page Not Found",
@@ -12,12 +9,13 @@ export const metadata: Metadata = {
 };
 
 export default function GlobalNotFound() {
+  const locale = "en"; // Default to English for the 404 page
+
   return (
-    <html lang="en" className={inter.className}>
-      <body>
-        <h1>404 - Page Not Found</h1>
-        <p>This page does not exist.</p>
-      </body>
-    </html>
+    <RootLayout lang={locale}>
+      <Header />
+      <h1>404 - Page Not Found</h1>
+      <p>This page does not exist.</p>
+    </RootLayout>
   );
 }

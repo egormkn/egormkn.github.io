@@ -1,5 +1,3 @@
-import NotFound from "@/app/(i18n)/[locale]/not-found";
+import NotFound from "@/app/[locale]/not-found";
 
-export default function Page() {
-  return <NotFound />;
-}
+export default NotFound;

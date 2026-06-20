@@ -1,6 +1,19 @@
 @import "./fontawesome";
 @import "./tailwind";
 
+html {
+  @apply h-full antialiased;
+}
+
+body {
+  @apply flex flex-col bg-base-200;
+
+  min-height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+}
+
 ::view-transition-group(.morph) {
   animation-duration: 400ms;
 }

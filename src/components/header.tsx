@@ -40,7 +40,7 @@ function Menu({
 
 export default function Header() {
   return (
-    <div className="daisy-navbar bg-base-100 shadow-sm">
+    <header className="daisy-navbar sticky top-0 z-50 bg-base-100 shadow-sm backdrop-blur">
       <div className="daisy-navbar-start">
         <div className="group daisy-dropdown lg:hidden">
           <div
@@ -67,6 +67,6 @@ export default function Header() {
         <ThemeSwitcher />
         <LocaleSwitcher />
       </div>
-    </div>
+    </header>
   );
 }

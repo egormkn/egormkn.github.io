@@ -1,5 +1,3 @@
-import DefaultPage from "@/app/(i18n)/[locale]/page";
+import Page from "@/app/[locale]/page";
 
-export default async function Page() {
-  return <DefaultPage />;
-}
+export default Page;
