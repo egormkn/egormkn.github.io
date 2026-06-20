@@ -7,7 +7,8 @@ import { type Locale, useLocale, useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { ChangeEvent, ReactNode, useTransition } from "react";
 
-import { usePathname, useRouter } from "@/i18n/navigation";
+import NextLink from "next/link";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
 export default function LocaleSwitcher() {
@@ -55,7 +56,9 @@ export default function LocaleSwitcher() {
         <ul tabIndex={-1} className="daisy-dropdown-content daisy-menu z-1 rounded-box bg-base-100 p-2 shadow-sm">
           {routing.locales.map((cur) => (
             <li key={cur}>
-              <a onClick={() => onSetLocale(cur)}>{t("locale", { locale: cur })}</a>
+              <NextLink href={`/${cur}${pathname}`} onClick={() => onSetLocale(cur)}>
+                {t("locale", { locale: cur })}
+              </NextLink>
             </li>
           ))}
         </ul>

@@ -17,11 +17,9 @@ function Menu({
 
   return (
     <ul className={className} {...props}>
-      {type === "vertical" && (
-        <li>
-          <Link href="/">{t("home")}</Link>
-        </li>
-      )}
+      <li>
+        <Link href="/">{t("home")}</Link>
+      </li>
       <li>
         <Link href="/blog">{t("blog")}</Link>
       </li>
