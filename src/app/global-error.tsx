@@ -1,6 +1,7 @@
 "use client";
 
 // Error boundaries must be Client Components
+import Content from "@/components/content";
 import Header from "@/components/header";
 import RootLayout from "@/components/root-layout";
 
@@ -17,8 +18,10 @@ export default function GlobalError({
   return (
     <RootLayout lang={locale}>
       <Header />
-      <h2>Something went wrong!</h2>
-      <button onClick={() => unstable_retry()}>Try again</button>
+      <Content>
+        <h2>Something went wrong!</h2>
+        <button onClick={() => unstable_retry()}>Try again</button>
+      </Content>
     </RootLayout>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import Content from "@/components/content";
 import Header from "@/components/header";
 import RootLayout from "@/components/root-layout";
 
@@ -14,8 +15,10 @@ export default function GlobalNotFound() {
   return (
     <RootLayout lang={locale}>
       <Header />
-      <h1>404 - Page Not Found</h1>
-      <p>This page does not exist.</p>
+      <Content>
+        <h1>404 - Page Not Found</h1>
+        <p>This page does not exist.</p>
+      </Content>
     </RootLayout>
   );
 }
