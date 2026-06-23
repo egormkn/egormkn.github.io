@@ -6,7 +6,9 @@ import Header from "@/components/header";
 import RootLayout from "@/components/root-layout";
 import { routing } from "@/i18n/routing";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const path = await import("node:path");
+  if (path.basename(__dirname) !== "[locale]") return [];
   return routing.locales.map((locale) => ({ locale }));
 }
 

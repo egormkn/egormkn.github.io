@@ -1,41 +1,12 @@
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
-import { useTranslations } from "next-intl";
 
 import LocaleSwitcher from "@/components/locale-switcher";
 import ThemeSwitcher from "@/components/theme-switcher";
-import { Link } from "@/i18n/navigation";
 
 import HeaderHomeLink from "./header-home-link";
-
-function Menu({
-  type,
-  className,
-  ...props
-}: { type: "horizontal" | "vertical" } & React.HTMLAttributes<HTMLUListElement>) {
-  const t = useTranslations("Menu");
-
-  return (
-    <ul className={className} {...props}>
-      <li>
-        <Link href="/">{t("home")}</Link>
-      </li>
-      <li>
-        <Link href="/blog">{t("blog")}</Link>
-      </li>
-      <li>
-        <Link href="/projects">{t("projects")}</Link>
-      </li>
-      <li>
-        <Link href="/resume">{t("resume")}</Link>
-      </li>
-      <li>
-        <Link href="/about">{t("about")}</Link>
-      </li>
-    </ul>
-  );
-}
+import Menu from "./menu";
 
 export default function Header({ fullWidth }: { fullWidth?: boolean }) {
   return (

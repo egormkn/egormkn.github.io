@@ -14,6 +14,6 @@ body {
   min-height: -webkit-fill-available;
 }
 
-::view-transition-group(.morph) {
+/* ::view-transition-group(.morph) {
   animation-duration: 400ms;
-}
+} */
