@@ -1,9 +1,19 @@
 @import "tailwindcss";
 
+@theme {
+  --aspect-a4: 1 / 1.4142;
+}
+
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
+
 @plugin "daisyui" {
   prefix: daisy-;
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  --color-neutral: oklch(40% .005 285.823);
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));

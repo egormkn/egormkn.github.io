@@ -26,9 +26,6 @@ export default function Menu({
       <li>
         <Link href="/resume" className={clsx(pathname.startsWith("/resume") && "daisy-menu-active")}>{t("resume")}</Link>
       </li>
-      <li>
-        <Link href="/about" className={clsx(pathname.startsWith("/about") && "daisy-menu-active")}>{t("about")}</Link>
-      </li>
     </ul>
   );
 }

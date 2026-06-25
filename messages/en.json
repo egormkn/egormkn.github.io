@@ -15,7 +15,17 @@
   },
   "NotFound": {
     "title": "Page not found",
+    "description": "Could not find requested resource",
     "back": "Back",
     "home": "Home"
+  },
+  "Resume": {
+    "title": "Resume",
+    "url": "https://egor.cc/cv/cv-makarenko-en.pdf",
+    "htmlUrl": "",
+    "download": "Download PDF"
+  },
+  "Header": {
+    "menu": "Menu"
   }
 }

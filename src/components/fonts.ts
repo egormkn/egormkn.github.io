@@ -3,16 +3,22 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 
 fontawesomeConfig.autoAddCss = false;
 
-export const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin", "cyrillic"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin", "cyrillic"],
+// });
 
-export const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin", "cyrillic"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin", "cyrillic"],
+// });
 
-export const inter = Inter({ subsets: ["latin", "cyrillic"] });
+// const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
-export const fontsClassName = `${geistSans.variable} ${geistMono.variable}`;
+// const fontsClassName = `${geistSans.variable} ${geistMono.variable}`;
+const fontsClassName = ``;
+
+export {
+  // geistSans, geistMono, inter,
+  fontsClassName,
+};

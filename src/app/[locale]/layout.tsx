@@ -1,8 +1,6 @@
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 
-import Content from "@/components/content";
-import Header from "@/components/header";
 import RootLayout from "@/components/root-layout";
 import { routing } from "@/i18n/routing";
 
@@ -22,10 +20,5 @@ export default async function Layout({ children, params }: LayoutProps<"/"> | La
     locale = resolvedParams.locale;
   }
 
-  return (
-    <RootLayout lang={locale}>
-      <Header fullWidth={locale === "en"} />
-      <Content fullWidth={locale === "en"}>{children}</Content>
-    </RootLayout>
-  );
+  return <RootLayout lang={locale}>{children}</RootLayout>;
 }

@@ -1,7 +1,8 @@
-export const dynamicParams = false;
+import { getPosts } from "../posts";
 
 export function generateStaticParams() {
-  return [{ slug: "main" }, { slug: "about" }];
+  const posts = getPosts();
+  return [...posts];
 }
 
 export default async function Page({ params }: PageProps<"/blog/[slug]"> | PageProps<"/[locale]/blog/[slug]">) {

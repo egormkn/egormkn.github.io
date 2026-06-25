@@ -17,5 +17,9 @@
     "title": "Страница не найдена",
     "back": "Назад",
     "home": "На главную"
+  },
+  "Resume": {
+    "url": "https://egor.cc/cv/cv-makarenko-ru.pdf",
+    "download": "Скачать PDF"
   }
 }

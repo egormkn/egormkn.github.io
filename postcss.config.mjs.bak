@@ -1,0 +1,16 @@
+/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+    "postcss-preset-env": {
+      debug: true,
+      // features: {
+      //   ""
+      // }
+    },
+    ["./postcss-patches"]: {},
+    "postcss-focus-within": {}
+  },
+};
+
+export default config;

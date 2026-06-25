@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Content from "@/components/content";
 import Header from "@/components/header";
 import RootLayout from "@/components/root-layout";
+import NotFound from "@/app/[locale]/(container)/not-found";
 
 export const metadata: Metadata = {
   title: "404 - Page Not Found",
@@ -16,8 +17,7 @@ export default function GlobalNotFound() {
     <RootLayout lang={locale}>
       <Header />
       <Content>
-        <h1>404 - Page Not Found</h1>
-        <p>This page does not exist.</p>
+        <NotFound />
       </Content>
     </RootLayout>
   );
