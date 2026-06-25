@@ -1,8 +1,8 @@
 "use client";
 
-import semver from "semver";
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import semver from "semver";
 import { UAParser } from "ua-parser-js";
 import { BrowserName, EngineName } from "ua-parser-js/enums";
 
@@ -11,7 +11,7 @@ const PdfViewerCustom = dynamic(() => import("@/components/pdf-viewer-custom"), 
   loading: ({ ...props }) => <div>Loading...</div>,
 });
 
-function getPdfFallbackUrls(url: string, htmlUrl?: string) {
+function getPdfFallbackUrls(url: string, htmlUrl?: string, htmlMobileUrl?: string) {
   const fallbackUrls = [];
 
   if (typeof window !== "undefined") {
@@ -19,8 +19,8 @@ function getPdfFallbackUrls(url: string, htmlUrl?: string) {
     const engineVersion = engine.version ?? "0";
 
     if (
-      engine.is(EngineName.BLINK) && semver.satisfies(engineVersion, ">=125") ||
-      engine.is(EngineName.GECKO) && semver.satisfies(engineVersion, ">=140") ||
+      (engine.is(EngineName.BLINK) && semver.satisfies(engineVersion, ">=125")) ||
+      (engine.is(EngineName.GECKO) && semver.satisfies(engineVersion, ">=140")) ||
       browser.is(BrowserName.FIREFOX) ||
       browser.is(BrowserName.EDGE) ||
       browser.is(BrowserName.SAFARI) ||
@@ -29,6 +29,10 @@ function getPdfFallbackUrls(url: string, htmlUrl?: string) {
       browser.is(BrowserName.OPERA)
     ) {
       fallbackUrls.push(`https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=${encodeURIComponent(url)}`);
+    }
+
+    if (htmlMobileUrl && window.screen.width < 512) {
+      fallbackUrls.push(htmlMobileUrl);
     }
   }
 
@@ -43,51 +47,59 @@ export default function PdfViewerFallback({
   title = "",
   url,
   htmlUrl,
+  htmlMobileUrl,
   fallbackTimeoutMs = 15000,
 }: {
   title?: string;
   url: string;
   htmlUrl?: string;
+  htmlMobileUrl?: string;
   fallbackTimeoutMs?: number;
 }) {
-  const fallbackUrls = getPdfFallbackUrls(url, htmlUrl);
-
+  const [fallbackUrls, setFallbackUrls] = useState(() => getPdfFallbackUrls(url, htmlUrl, htmlMobileUrl));
   const [fallbackUrlIndex, setFallbackUrlIndex] = useState(0);
-  const [hasLoaded, setHasLoaded] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout>(null);
 
-  const fallbackUrl = fallbackUrls[fallbackUrlIndex];
+  const fallbackUrl = useMemo(() => fallbackUrls[fallbackUrlIndex], [fallbackUrls, fallbackUrlIndex]);
 
   useEffect(() => {
-    if (navigator.pdfViewerEnabled || hasLoaded) return;
+    if (navigator.pdfViewerEnabled) return;
 
-    timeoutRef.current = setTimeout(() => {
-      if (!hasLoaded) {
-        setFallbackUrlIndex((fallbackUrlIndex) => (fallbackUrlIndex + 1) % fallbackUrls.length);
-      }
-    }, fallbackTimeoutMs);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setFallbackUrls(getPdfFallbackUrls(url, htmlUrl, htmlMobileUrl));
+  }, [url, htmlUrl, htmlMobileUrl]);
 
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [hasLoaded, fallbackUrlIndex, fallbackTimeoutMs, fallbackUrls.length]);
+  // const [hasLoaded, setHasLoaded] = useState(false);
+  // const timeoutRef = useRef<NodeJS.Timeout>(null);
 
-  const handleOnLoad = () => {
-    // If it fires successfully, clear the switch-over timer
-    setHasLoaded(true);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-  };
+  // useEffect(() => {
+  //   if (navigator.pdfViewerEnabled || hasLoaded) return;
 
-  if (fallbackUrl === "custom") return <PdfViewerCustom url={url} />;
+  //   timeoutRef.current = setTimeout(() => {
+  //     if (!hasLoaded) {
+  //       setFallbackUrlIndex((fallbackUrlIndex) => (fallbackUrlIndex + 1) % fallbackUrls.length);
+  //     }
+  //   }, fallbackTimeoutMs);
+
+  //   return () => {
+  //     if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  //   };
+  // }, [hasLoaded, fallbackUrlIndex, fallbackTimeoutMs, fallbackUrls.length]);
+
+  // const handleOnLoad = () => {
+  //   // If it fires successfully, clear the switch-over timer
+  //   setHasLoaded(true);
+  //   if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  // };
+
+  // if (fallbackUrl === "custom") return <PdfViewerCustom url={url} />;
 
   return (
     <iframe
       title={title}
       src={fallbackUrl}
-      onLoad={handleOnLoad}
+      // onLoad={handleOnLoad}
       className="w-full grow border-0"
       allowFullScreen
-      suppressHydrationWarning
     ></iframe>
   );
 }

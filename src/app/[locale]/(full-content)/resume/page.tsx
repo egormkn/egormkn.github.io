@@ -11,10 +11,11 @@ export default function Page() {
   const title = t("title");
   const url = t("url");
   const htmlUrl = t("htmlUrl");
+  const htmlMobileUrl = t("htmlMobileUrl");
 
   return (
     <>
-      <PdfViewer title={title} url={url} htmlUrl={htmlUrl} className="w-full grow" />
+      <PdfViewer title={title} url={url} htmlUrl={htmlUrl} htmlMobileUrl={htmlMobileUrl} className="w-full grow" />
       <div className="daisy-fab">
         <Link href={url} target="_blank" className="daisy-btn bg-[#A31719] text-white">
           <FontAwesomeIcon icon={faFileArrowDown} /> Download PDF

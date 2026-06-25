@@ -22,7 +22,8 @@
   "Resume": {
     "title": "Resume",
     "url": "https://egor.cc/cv/cv-makarenko-en.pdf",
-    "htmlUrl": "",
+    "htmlUrl": "https://egor.cc/cv/cv-makarenko-en.html",
+    "htmlMobileUrl": "https://egor.cc/cv/cv-makarenko-en.mobile.html",
     "download": "Download PDF"
   },
   "Header": {
