@@ -11,34 +11,40 @@ const PdfViewerCustom = dynamic(() => import("@/components/pdf-viewer-custom"), 
   loading: ({ ...props }) => <div>Loading...</div>,
 });
 
-function getPdfFallbackUrls(url: string, htmlUrl?: string, htmlMobileUrl?: string) {
+function getPdfFallbackUrls(
+  url: string,
+  htmlUrl?: string,
+  options?: { pdfJsViewerUrl?: string; googleViewerUrl?: string },
+) {
+  options = {
+    pdfJsViewerUrl: "https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=",
+    googleViewerUrl: "https://drive.google.com/viewerng/viewer?embedded=true&url=",
+    ...(options ?? {}),
+  };
   const fallbackUrls = [];
 
   if (typeof window !== "undefined") {
     const { browser, engine } = UAParser();
+    const browserVersion = browser.version ?? "0";
     const engineVersion = engine.version ?? "0";
 
     if (
       (engine.is(EngineName.BLINK) && semver.satisfies(engineVersion, ">=125")) ||
-      (engine.is(EngineName.GECKO) && semver.satisfies(engineVersion, ">=140")) ||
-      browser.is(BrowserName.FIREFOX) ||
-      browser.is(BrowserName.EDGE) ||
-      browser.is(BrowserName.SAFARI) ||
-      browser.is(BrowserName.CHROMIUM) ||
-      browser.is(BrowserName.CHROME) ||
-      browser.is(BrowserName.OPERA)
+      (engine.is(EngineName.GECKO) && semver.satisfies(engineVersion, ">=140"))
+      // (browser.is(BrowserName.FIREFOX) && semver.satisfies(browserVersion, ">=140")) ||
+      // browser.is(BrowserName.EDGE) ||
+      // browser.is(BrowserName.SAFARI) ||
+      // browser.is(BrowserName.CHROMIUM) ||
+      // browser.is(BrowserName.CHROME) ||
+      // browser.is(BrowserName.OPERA)
     ) {
-      fallbackUrls.push(`https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=${encodeURIComponent(url)}`);
-    }
-
-    if (htmlMobileUrl && window.screen.width < 512) {
-      fallbackUrls.push(htmlMobileUrl);
+      fallbackUrls.push(`${options.pdfJsViewerUrl}${encodeURIComponent(url)}`);
     }
   }
 
   if (htmlUrl) fallbackUrls.push(htmlUrl);
 
-  fallbackUrls.push(`https://drive.google.com/viewerng/viewer?embedded=true&url=${encodeURIComponent(url)}`);
+  fallbackUrls.push(`${options.googleViewerUrl}${encodeURIComponent(url)}`);
 
   return fallbackUrls;
 }
@@ -47,16 +53,14 @@ export default function PdfViewerFallback({
   title = "",
   url,
   htmlUrl,
-  htmlMobileUrl,
   fallbackTimeoutMs = 15000,
 }: {
   title?: string;
   url: string;
   htmlUrl?: string;
-  htmlMobileUrl?: string;
   fallbackTimeoutMs?: number;
 }) {
-  const [fallbackUrls, setFallbackUrls] = useState(() => getPdfFallbackUrls(url, htmlUrl, htmlMobileUrl));
+  const [fallbackUrls, setFallbackUrls] = useState(() => getPdfFallbackUrls(url, htmlUrl));
   const [fallbackUrlIndex, setFallbackUrlIndex] = useState(0);
 
   const fallbackUrl = useMemo(() => fallbackUrls[fallbackUrlIndex], [fallbackUrls, fallbackUrlIndex]);
@@ -65,8 +69,8 @@ export default function PdfViewerFallback({
     if (navigator.pdfViewerEnabled) return;
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setFallbackUrls(getPdfFallbackUrls(url, htmlUrl, htmlMobileUrl));
-  }, [url, htmlUrl, htmlMobileUrl]);
+    setFallbackUrls(getPdfFallbackUrls(url, htmlUrl));
+  }, [url, htmlUrl]);
 
   // const [hasLoaded, setHasLoaded] = useState(false);
   // const timeoutRef = useRef<NodeJS.Timeout>(null);

@@ -17,7 +17,6 @@ export default function PdfViewer({
   title = "",
   url,
   htmlUrl,
-  htmlMobileUrl,
   className,
   fallbackTimeoutMs = 15000,
   pdfViewerOptions = defaultPdfViewerOptions,
@@ -26,7 +25,6 @@ export default function PdfViewer({
   title?: string;
   url: string;
   htmlUrl?: string;
-  htmlMobileUrl?: string;
   className?: string;
   fallbackTimeoutMs?: number;
   pdfViewerOptions?: Record<string, string>;
@@ -47,7 +45,6 @@ export default function PdfViewer({
           title={title}
           url={url}
           htmlUrl={htmlUrl}
-          htmlMobileUrl={htmlMobileUrl}
           fallbackTimeoutMs={fallbackTimeoutMs}
         />
       </object>
