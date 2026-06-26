@@ -1,32 +1,27 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
 import semver from "semver";
 import { UAParser } from "ua-parser-js";
-import { BrowserName, EngineName } from "ua-parser-js/enums";
-
-const PdfViewerCustom = dynamic(() => import("@/components/pdf-viewer-custom"), {
-  ssr: false,
-  loading: ({ ...props }) => <div>Loading...</div>,
-});
+import { EngineName } from "ua-parser-js/enums";
 
 function getPdfFallbackUrls(
   url: string,
   htmlUrl?: string,
-  options?: { pdfJsViewerUrl?: string; googleViewerUrl?: string },
+  options?: { parseUserAgent?: boolean; pdfJsViewerUrl?: string; googleViewerUrl?: string },
 ) {
   options = {
+    parseUserAgent: false,
     pdfJsViewerUrl: "https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=",
     googleViewerUrl: "https://drive.google.com/viewerng/viewer?embedded=true&url=",
     ...(options ?? {}),
   };
   const fallbackUrls = [];
 
-  if (typeof window !== "undefined") {
+  if (options.parseUserAgent) {
     const { browser, engine } = UAParser();
-    const browserVersion = browser.version ?? "0";
-    const engineVersion = engine.version ?? "0";
+    const browserVersion = semver.coerce(browser.version) ?? "0";
+    const engineVersion = semver.coerce(engine.version) ?? "0";
 
     if (
       (engine.is(EngineName.BLINK) && semver.satisfies(engineVersion, ">=125")) ||
@@ -63,14 +58,14 @@ export default function PdfViewerFallback({
   const [fallbackUrls, setFallbackUrls] = useState(() => getPdfFallbackUrls(url, htmlUrl));
   const [fallbackUrlIndex, setFallbackUrlIndex] = useState(0);
 
-  const fallbackUrl = useMemo(() => fallbackUrls[fallbackUrlIndex], [fallbackUrls, fallbackUrlIndex]);
-
   useEffect(() => {
-    if (navigator.pdfViewerEnabled) return;
+    if (window.navigator.pdfViewerEnabled) return;
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setFallbackUrls(getPdfFallbackUrls(url, htmlUrl));
+    const fallbackUrlsOnClient = getPdfFallbackUrls(url, htmlUrl, { parseUserAgent: true });
+    setFallbackUrls(fallbackUrlsOnClient);
   }, [url, htmlUrl]);
+
+  const fallbackUrl = fallbackUrls[fallbackUrlIndex];
 
   // const [hasLoaded, setHasLoaded] = useState(false);
   // const timeoutRef = useRef<NodeJS.Timeout>(null);
@@ -99,8 +94,9 @@ export default function PdfViewerFallback({
 
   return (
     <iframe
-      title={title}
+      key={fallbackUrl}
       src={fallbackUrl}
+      title={title}
       // onLoad={handleOnLoad}
       className="w-full grow border-0"
       allowFullScreen
