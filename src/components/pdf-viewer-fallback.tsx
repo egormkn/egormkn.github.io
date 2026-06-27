@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import semver from "semver";
 import { UAParser } from "ua-parser-js";
 import { EngineName } from "ua-parser-js/enums";
@@ -12,10 +12,11 @@ function getPdfFallbackUrls(
 ) {
   options = {
     parseUserAgent: false,
-    pdfJsViewerUrl: "https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=",
+    pdfJsViewerUrl: "/pdfjs/web/viewer?file=",
     googleViewerUrl: "https://drive.google.com/viewerng/viewer?embedded=true&url=",
     ...(options ?? {}),
   };
+
   const fallbackUrls = [];
 
   if (options.parseUserAgent) {
@@ -23,9 +24,12 @@ function getPdfFallbackUrls(
     const browserVersion = semver.coerce(browser.version) ?? "0";
     const engineVersion = semver.coerce(engine.version) ?? "0";
 
-    if (
+    const isSupportedBrowser =
       (engine.is(EngineName.BLINK) && semver.satisfies(engineVersion, ">=125")) ||
-      (engine.is(EngineName.GECKO) && semver.satisfies(engineVersion, ">=140"))
+      (engine.is(EngineName.GECKO) && semver.satisfies(engineVersion, ">=140"));
+
+    if (
+      isSupportedBrowser
       // (browser.is(BrowserName.FIREFOX) && semver.satisfies(browserVersion, ">=140")) ||
       // browser.is(BrowserName.EDGE) ||
       // browser.is(BrowserName.SAFARI) ||
@@ -38,6 +42,10 @@ function getPdfFallbackUrls(
   }
 
   if (htmlUrl) fallbackUrls.push(htmlUrl);
+
+  if (url.startsWith("/")) {
+    url = `${process.env.NEXT_PUBLIC_URL}${url}`;
+  }
 
   fallbackUrls.push(`${options.googleViewerUrl}${encodeURIComponent(url)}`);
 
@@ -62,6 +70,8 @@ export default function PdfViewerFallback({
     if (window.navigator.pdfViewerEnabled) return;
 
     const fallbackUrlsOnClient = getPdfFallbackUrls(url, htmlUrl, { parseUserAgent: true });
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFallbackUrls(fallbackUrlsOnClient);
   }, [url, htmlUrl]);
 
