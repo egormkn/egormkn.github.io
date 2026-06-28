@@ -1,11 +1,11 @@
 import type { MDXComponents } from "mdx/types";
 
 export function ContainerLayout({ children }: { children: React.ReactNode }) {
-  return <article className="container mx-auto">{children}</article>;
+  return <article className="prose container mx-auto">{children}</article>;
 }
 
 export function FullWidthLayout({ children }: { children: React.ReactNode }) {
-  return <article>{children}</article>;
+  return <article className="prose">{children}</article>;
 }
 
 const components = {

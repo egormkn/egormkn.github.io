@@ -1,6 +1,8 @@
 @import "./fontawesome";
 @import "./tailwind";
 
+@import 'katex/dist/katex.min.css';
+
 html {
   @apply h-full antialiased;
 }

@@ -50,6 +50,15 @@ const withNextIntl = createNextIntlPlugin();
 
 const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
+  options: {
+    remarkPlugins: [
+      ["remark-frontmatter", { type: "yaml", marker: "-" }],
+      "remark-mdx-frontmatter",
+      "remark-gfm",
+      "remark-math",
+    ],
+    rehypePlugins: ["rehype-katex"],
+  },
 });
 
 export default withMDX(withNextIntl(nextConfig));

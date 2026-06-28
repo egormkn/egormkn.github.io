@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { getPosts } from "./posts";
+import { Link } from "@/i18n/navigation";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -14,7 +15,7 @@ export default function Page() {
       {posts.map((post) => (
         <div key={post.slug} className="daisy-card w-96 bg-base-100 shadow-sm">
           <div className="daisy-card-body">
-            <h2 className="daisy-card-title">{post.slug}</h2>
+            <Link href={`/blog/${post.slug}`} className="daisy-card-title">{post.slug}</Link>
             <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
             <div className="daisy-card-actions justify-end">
               <button className="daisy-btn daisy-btn-primary">Open</button>
