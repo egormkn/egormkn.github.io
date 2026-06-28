@@ -1,6 +1,7 @@
 {
   "Main": {
-    "name": "Егор Макаренко"
+    "name": "Егор Макаренко",
+    "professional_title": "Разработчик ПО"
   },
   "Menu": {
     "home": "Главная",
@@ -10,18 +11,22 @@
     "about": "Обо мне"
   },
   "LocaleSwitcher": {
-    "label": "Change language",
+    "label": "Language / Язык",
     "locale": "{locale, select, ru {Russian} en {English} other {Unknown}}"
   },
   "NotFound": {
     "title": "Страница не найдена",
+    "description": "Возможно, она была удалена или никогда не существовала",
     "back": "Назад",
     "home": "На главную"
   },
   "Resume": {
-    "title": "Resume",
+    "title": "Резюме",
     "url": "/resume/cv-makarenko-ru.pdf",
     "htmlUrl": "/resume/cv-makarenko-ru.html",
     "download": "Скачать PDF"
+  },
+  "Header": {
+    "menu": "Меню"
   }
 }

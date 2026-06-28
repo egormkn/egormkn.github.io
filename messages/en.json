@@ -1,6 +1,7 @@
 {
   "Main": {
-    "name": "Egor Makarenko"
+    "name": "Egor Makarenko",
+    "professional_title": "Software Engineer"
   },
   "Menu": {
     "home": "Home",
@@ -10,7 +11,7 @@
     "about": "About me"
   },
   "LocaleSwitcher": {
-    "label": "Change language",
+    "label": "Language / Язык",
     "locale": "{locale, select, ru {Russian} en {English} other {Unknown}}"
   },
   "NotFound": {
