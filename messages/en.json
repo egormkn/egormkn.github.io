@@ -1,7 +1,11 @@
 {
-  "Main": {
-    "name": "Egor Makarenko",
-    "professional_title": "Software Engineer"
+  "Home": {
+    "title": "Home",
+    "description": "Personal website of Egor Makarenko",
+    "content": {
+      "name": "Egor Makarenko",
+      "professional_title": "Software Engineer"
+    }
   },
   "Menu": {
     "home": "Home",
@@ -28,5 +32,12 @@
   },
   "Header": {
     "menu": "Menu"
+  },
+  "Metadata": {
+    "title": {
+      "template": "%s | Egor Makarenko",
+      "default": "Personal website"
+    },
+    "description": ""
   }
 }

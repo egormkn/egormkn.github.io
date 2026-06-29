@@ -1,8 +1,36 @@
-import { hasLocale } from "next-intl";
+import type { Metadata } from "next";
+import { Locale, hasLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import RootLayout from "@/components/root-layout";
 import { routing } from "@/i18n/routing";
+
+export async function generateMetadata({ params }: any): Promise<Metadata> {
+  let locale = routing.defaultLocale;
+  const resolvedParams = await params;
+  const withLocale = "locale" in resolvedParams;
+  if (withLocale) {
+    if (!hasLocale(routing.locales, resolvedParams.locale)) {
+      notFound();
+    }
+    locale = resolvedParams.locale;
+  }
+
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: {
+      template: t("title.template"),
+      default: t("title.default"),
+    },
+    description: t("description"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_URL! + (withLocale ? "" : "/en")),
+    alternates: {
+      canonical: "./",
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const path = await import("node:path");

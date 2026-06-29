@@ -53,7 +53,7 @@ const withMDX = createMDX({
   options: {
     remarkPlugins: [
       ["remark-frontmatter", { type: "yaml", marker: "-" }],
-      "remark-mdx-frontmatter",
+      ["remark-mdx-frontmatter", { default: {} }],
       "remark-gfm",
       "remark-math",
       "remark-smartypants",

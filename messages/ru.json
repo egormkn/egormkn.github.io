@@ -1,14 +1,19 @@
 {
-  "Main": {
-    "name": "Егор Макаренко",
-    "professional_title": "Разработчик ПО"
-  },
   "Menu": {
     "home": "Главная",
     "blog": "Блог",
+    "notes": "Заметки",
     "projects": "Проекты",
     "resume": "Резюме",
     "about": "Обо мне"
+  },
+  "Home": {
+    "title": "Главная",
+    "description": "Персональный сайт Егора Макаренко",
+    "content": {
+      "name": "Егор Макаренко",
+      "professional_title": "Разработчик ПО"
+    }
   },
   "LocaleSwitcher": {
     "label": "Language / Язык",
@@ -28,5 +33,12 @@
   },
   "Header": {
     "menu": "Меню"
+  },
+  "Metadata": {
+    "title": {
+      "template": "%s | Егор Макаренко",
+      "default": "Личный сайт"
+    },
+    "description": ""
   }
 }

@@ -1,13 +1,35 @@
-import { getPosts } from "../posts";
+import type { Metadata, ResolvingMetadata } from "next";
+import { notFound } from "next/navigation";
+
+import { postBySlug, posts } from "../posts";
+
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const { slug } = await params;
+  const { Content, ...props } = postBySlug[slug];
+
+  const resolvedParent = await parent;
+
+  return {
+    title: props.title ?? resolvedParent.title,
+    description: props.description ?? resolvedParent.description,
+  };
+}
 
 export function generateStaticParams() {
-  const posts = getPosts();
-  return [...posts];
+  return posts.map(({ slug }) => ({ slug }));
 }
 
 export default async function Page({ params }: PageProps<"/blog/[slug]"> | PageProps<"/[locale]/blog/[slug]">) {
   const { slug } = await params;
-  const { default: Post, frontmatter } = await import(`@/../content/${slug}.mdx`);
+  if (!(slug in postBySlug)) {
+    notFound();
+  }
+  const { Content, ...props } = postBySlug[slug];
 
-  return <Post slug={slug} frontmatter={frontmatter} />;
+  return <Content {...props} />;
 }
