@@ -1,8 +1,9 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
+
+import { Link, usePathname } from "@/i18n/navigation";
 
 export default function Menu({
   type,
@@ -15,16 +16,48 @@ export default function Menu({
   return (
     <ul className={clsx("gap-1", className)} {...props}>
       <li>
-        <Link href="/" className={clsx(pathname === "/" && "daisy-menu-active")}>{t("home")}</Link>
+        <Link
+          href="/"
+          className={clsx(pathname === "/" && "daisy-menu-active")}
+          onClick={() => {
+            (document.activeElement as HTMLElement).blur();
+          }}
+        >
+          {t("home")}
+        </Link>
       </li>
       <li>
-        <Link href="/blog" className={clsx(pathname.startsWith("/blog") && "daisy-menu-active")}>{t("blog")}</Link>
+        <Link
+          href="/blog"
+          className={clsx(pathname.startsWith("/blog") && "daisy-menu-active")}
+          onClick={() => {
+            (document.activeElement as HTMLElement).blur();
+          }}
+        >
+          {t("blog")}
+        </Link>
       </li>
       <li>
-        <Link href="/projects" className={clsx(pathname.startsWith("/projects") && "daisy-menu-active")}>{t("projects")}</Link>
+        <Link
+          href="/projects"
+          className={clsx(pathname.startsWith("/projects") && "daisy-menu-active")}
+          onClick={() => {
+            (document.activeElement as HTMLElement).blur();
+          }}
+        >
+          {t("projects")}
+        </Link>
       </li>
       <li>
-        <Link href="/resume" className={clsx(pathname.startsWith("/resume") && "daisy-menu-active")}>{t("resume")}</Link>
+        <Link
+          href="/resume"
+          className={clsx(pathname.startsWith("/resume") && "daisy-menu-active")}
+          onClick={() => {
+            (document.activeElement as HTMLElement).blur();
+          }}
+        >
+          {t("resume")}
+        </Link>
       </li>
     </ul>
   );
