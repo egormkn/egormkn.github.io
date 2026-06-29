@@ -56,8 +56,22 @@ const withMDX = createMDX({
       "remark-mdx-frontmatter",
       "remark-gfm",
       "remark-math",
+      "remark-smartypants",
     ],
-    rehypePlugins: ["rehype-katex"],
+    rehypePlugins: [
+      "rehype-katex",
+      [
+        "@shikijs/rehype",
+        {
+          themes: {
+            light: "min-light",
+            dark: "nord",
+          },
+        },
+      ],
+      "rehype-slug",
+      "rehype-autolink-headings",
+    ],
   },
 });
 
