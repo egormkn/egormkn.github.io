@@ -1,21 +1,27 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { Locale, hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import RootLayout from "@/components/root-layout";
+import { BASE_URL } from "@/config";
+import I18nRedirect from "@/i18n/redirect";
 import { routing } from "@/i18n/routing";
 
-export async function generateMetadata({ params }: any): Promise<Metadata> {
-  let locale = routing.defaultLocale;
-  const resolvedParams = await params;
-  const withLocale = "locale" in resolvedParams;
-  if (withLocale) {
+function getLocale(resolvedParams: { locale?: string }): Locale {
+  if ("locale" in resolvedParams) {
     if (!hasLocale(routing.locales, resolvedParams.locale)) {
       notFound();
     }
-    locale = resolvedParams.locale;
+    return resolvedParams.locale;
   }
+
+  return routing.defaultLocale;
+}
+
+export async function generateMetadata({ params, searchParams }: any, parent: ResolvingMetadata): Promise<Metadata> {
+  const resolvedParams = await params;
+  const locale = getLocale(resolvedParams);
 
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
@@ -25,7 +31,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
       default: t("title.default"),
     },
     description: t("description"),
-    metadataBase: new URL(process.env.NEXT_PUBLIC_URL! + (withLocale ? "" : "/en")),
+    metadataBase: new URL(BASE_URL),
     alternates: {
       canonical: "./",
     },
@@ -39,14 +45,13 @@ export async function generateStaticParams() {
 }
 
 export default async function Layout({ children, params }: LayoutProps<"/"> | LayoutProps<"/[locale]">) {
-  let locale = routing.defaultLocale;
   const resolvedParams = await params;
-  if ("locale" in resolvedParams) {
-    if (!hasLocale(routing.locales, resolvedParams.locale)) {
-      notFound();
-    }
-    locale = resolvedParams.locale;
-  }
+  const locale = getLocale(resolvedParams);
 
-  return <RootLayout lang={locale}>{children}</RootLayout>;
+  return (
+    <RootLayout lang={locale}>
+      <I18nRedirect />
+      {children}
+    </RootLayout>
+  );
 }

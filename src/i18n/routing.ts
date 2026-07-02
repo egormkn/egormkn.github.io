@@ -1,12 +1,15 @@
 import { defineRouting } from "next-intl/routing";
 
 export const routing = defineRouting({
-  // A list of all locales that are supported
   locales: ["en", "ru"],
-
-  // Used when no locale matches
   defaultLocale: "en",
-
-  // localePrefix: 'as-needed',
-  localePrefix: "always",
+  localePrefix: 'as-needed',
 });
+
+export function getCanonicalPathname(pathname: string) {
+  const localePrefix = "/" + routing.defaultLocale;
+  if (pathname === localePrefix || pathname.startsWith(localePrefix + "/")) {
+    return pathname.slice(localePrefix.length) || "/";
+  }
+  return pathname;
+}
