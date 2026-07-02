@@ -3,7 +3,7 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  "files.exclude": {
-    "src/app/(default)/{blog,projects,resume,about}": false
+  "search.exclude": {
+    "src/app/(en)": true
   }
 }
