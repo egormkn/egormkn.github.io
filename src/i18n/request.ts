@@ -1,9 +1,10 @@
 import deepmerge from "deepmerge";
-import { hasLocale } from "next-intl";
+import { hasLocale, Locale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 import * as rootParams from "next/root-params";
 
 import { routing } from "./routing";
+import { notFound } from "next/navigation";
 
 export default getRequestConfig(async ({ locale }) => {
   if (!locale) {
@@ -24,3 +25,14 @@ export default getRequestConfig(async ({ locale }) => {
 
   return { locale, messages };
 });
+
+export function getLocaleFromParams(resolvedParams: { locale?: string }): Locale {
+  if ("locale" in resolvedParams) {
+    if (!hasLocale(routing.locales, resolvedParams.locale)) {
+      notFound();
+    }
+    return resolvedParams.locale;
+  }
+
+  return routing.defaultLocale;
+}
