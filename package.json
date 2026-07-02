@@ -57,6 +57,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-mdx": "^3.8.1",
     "eslint-plugin-react-hooks": "^7.1.1",
     "flex-gap-polyfill": "^5.0.0",
     "postcss": "^8.5.15",

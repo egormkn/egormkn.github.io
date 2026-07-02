@@ -16,11 +16,11 @@ interface Post {
 }
 
 async function loadPost(filePath: string): Promise<Post | null> {
-  const absoluteFilePath = path.join(CONTENT_DIRECTORY, filePath);
+  const absoluteFilePath = path.join(CONTENT_DIRECTORY, "blog", filePath);
   const match = filePath.match(/^(.+)(\.(?:en|ru))?\.(mdx?)$/i);
   if (!match) return null;
   const [_, slug, lang, _extension] = match;
-  const { default: Content, frontmatter } = await import(`@/../content/${slug}.mdx`);
+  const { default: Content, frontmatter } = await import(`@/../content/blog/${slug}.mdx`);
   return {
     ...frontmatter,
     file: filePath,
@@ -32,7 +32,8 @@ async function loadPost(filePath: string): Promise<Post | null> {
 }
 
 export async function getPosts() {
-  const filePaths = await fs.readdir(CONTENT_DIRECTORY, { recursive: true });
+  const contentDirectory = path.join(CONTENT_DIRECTORY, "blog");
+  const filePaths = await fs.readdir(contentDirectory, { recursive: true });
   const posts = await Promise.all(filePaths.map(loadPost));
   return posts.filter((post) => post !== null).sort((post) => post.date.getTime());
 }

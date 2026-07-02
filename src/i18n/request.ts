@@ -26,7 +26,9 @@ export default getRequestConfig(async ({ locale }) => {
   return { locale, messages };
 });
 
-export function getLocaleFromParams(resolvedParams: { locale?: string }): Locale {
+export type LocaleParams = { locale?: string };
+
+export function getLocaleFromParams(resolvedParams: LocaleParams): Locale {
   if ("locale" in resolvedParams) {
     if (!hasLocale(routing.locales, resolvedParams.locale)) {
       notFound();

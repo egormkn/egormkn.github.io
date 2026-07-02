@@ -1,15 +1,14 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import RootLayout from "@/components/root-layout";
 import { BASE_URL } from "@/config";
 import I18nRedirect from "@/i18n/redirect";
-import { getLocaleFromParams } from "@/i18n/request";
+import { type LocaleParams, getLocaleFromParams } from "@/i18n/request";
 import { routing } from "@/i18n/routing";
 
-export async function generateMetadata({ params, searchParams }: any, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<LocaleParams> }): Promise<Metadata> {
   const locale = getLocaleFromParams(await params);
-
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
   return {

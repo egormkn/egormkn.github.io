@@ -1,0 +1,158 @@
+---
+metadata:
+  en:
+    title: "Egor Makarenko"
+    description: >-
+      Welcome to the personal website of Egor Makarenko, a passionate software engineer.
+      Explore my projects, learn about my skills, and connect with me through social links.
+  ru:
+    title: "Егор Макаренко"
+    description: >-
+      Добро пожаловать на личный сайт Егора Макаренко, увлеченного разработчика программного обеспечения.
+      Ознакомьтесь с моими проектами, узнайте о моих навыках и свяжитесь со мной через социальные сети.
+name: { en: "Egor Makarenko", ru: "Егор Макаренко" }
+professional_title: { en: "Software Engineer", ru: "Разработчик ПО" }
+photo_alt:
+  en: "Egor Makarenko, Software Engineer"
+  ru: "Егор Макаренко, Разработчик ПО"
+intro:
+  en: >-
+    Welcome to my personal website! Here you can find information about me,
+    my projects, and how to get in touch. Feel free to explore and connect with me
+    through the provided social links.
+  ru: >-
+    Добро пожаловать на мой личный сайт! Здесь вы можете найти информацию обо мне,
+    моих проектах и способах связи. Не стесняйтесь исследовать и связываться со мной
+    через предоставленные социальные сети.
+  en_alt: >-
+    Hello! I'm Egor, a passionate software engineer with a love for creating
+    innovative solutions. With a strong background in web development and a keen
+    eye for detail, I strive to build applications that are not only functional
+    but also user-friendly. My journey in the tech world has been fueled by
+    curiosity and a desire to continuously learn and grow. When I'm not coding,
+    you can find me exploring new technologies, contributing to open-source
+    projects, or sharing my knowledge through blogging. Let's connect and create
+    something amazing together!
+
+sections:
+  - id: social-links
+    name: { en: Social links, ru: Социальные сети }
+    links:
+      - id: email
+        name: Email
+        username: "egormkn@yandex.ru"
+        url: "mailto:egormkn@yandex.ru"
+        logo:
+          icon: ["fas", "fa-envelope"]
+          className: "text-[#FF5B10]"
+      - id: telegram
+        name: Telegram
+        username: "@EgorMakarenko"
+        url: https://t.me/EgorMakarenko
+        logo:
+          icon: ["fab", "fa-telegram"]
+          className: "text-[#24A1DE]"
+      - id: linkedin
+        name: LinkedIn
+        username: "@EgorMakarenko"
+        url: https://www.linkedin.com/in/egormakarenko/
+        logo:
+          icon: ["fab", "fa-linkedin"]
+          className: "text-[#0A66C2] dark:text-[#2C8BE9]"
+        iconClassName: "text-[#0A66C2] dark:text-[#2C8BE9]"
+      - id: github
+        name: GitHub
+        username: "@egormkn"
+        url: https://github.com/egormkn
+        logo:
+          icon: ["fab", "fa-github"]
+          className: "text-[#333] dark:text-[#FFF]"
+---
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faGithub, faTelegram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import clsx from "clsx";
+import Image from "next/image";
+import Link from "next/link";
+import { ViewTransition } from "react";
+
+import photo from "@assets/photo.jpg";
+import photo_dark from "@assets/photo_dark.jpg";
+
+export const _ = library.add(faGithub, faTelegram, faEnvelope, faLinkedin);
+
+export { DummyLayout as default } from "@/mdx-components";
+
+export const Photo = ({ className, ...props }) => {
+  return <>
+    <Image
+      src={photo}
+      className={clsx("dark:hidden", className)}
+      {...props}
+    />
+    <Image
+      src={photo_dark}
+      className={clsx("hidden dark:block", className)}
+      {...props}
+    />
+  </>
+};
+
+
+<div className="daisy-hero">
+  <div className="daisy-hero-content mt-20 mb-5 flex-col p-6 lg:flex-row">
+    <Photo 
+      width={150}
+      height={150}
+      alt={frontmatter.photo_alt[props.locale]}
+      fetchPriority="high"
+      placeholder="blur"
+      className="aspect-square max-w-sm rounded-full shadow-lg border-4 border-base-200 object-cover" />
+    <div className="p-4 text-center lg:text-start">
+      <h1 className="text-5xl font-bold">
+        <ViewTransition name="name" share="morph">
+          <span>{frontmatter.name[props.locale]}</span>
+        </ViewTransition>
+      </h1>
+      <h2 className="text-2xl text-base-content/70">
+        {frontmatter.professional_title[props.locale]}
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div className="mx-auto prose mb-5">
+  <p>{frontmatter.intro[props.locale]}</p>
+
+  {frontmatter.sections.map((section) => (
+    <details
+      id={section.id}
+      key={section.id}
+      className="daisy-collapse daisy-collapse-arrow my-3 bg-base-100 border-base-300 border"
+      open
+    >
+      <summary className="daisy-collapse-title font-semibold">
+        {section.name[props.locale]}
+      </summary>
+      <div className="daisy-collapse-content">
+        
+        <div className="flex flex-col lg:flex-row gap-4 lg:flex-wrap">
+          {section.links.map((link) => (
+            <Link href={link.url} target="_blank" rel="noopener noreferrer" key={link.id} className="daisy-btn daisy-btn-ghost text-start flex px-2">
+              <FontAwesomeIcon {...link.logo} size="2xl" widthAuto />
+              <div className="flex flex-col leading-tight">
+                <h5 className="font-semibold">{link.name}</h5>
+                <span className="text-base-content/70">
+                  {link.username}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+      </div>
+    </details>
+  ))}
+</div>
