@@ -3,37 +3,32 @@ en:
   metadata:
     title: "Egor Makarenko"
     description: >-
-      Welcome to the personal website of Egor Makarenko, a passionate software engineer.
-      Explore my projects, learn about my skills, and connect with me through social links.
+      Personal website of Egor Makarenko, a software engineer with experience in
+      computer vision, robotics, AI, and web technologies. Explore my projects,
+      learn about my skills, and connect with me through social links.
   name: "Egor Makarenko"
   professional_title: "Software Engineer"
   intro: >-
-    Welcome to my personal website! Here you can find information about me,
-    my projects, and how to get in touch. Feel free to explore and connect with me
-    through the provided social links.
+    Hello! I'm Egor, a software engineer who loves building efficient and reliable
+    systems that solve challenging problems.
+    My areas of interest include computer vision, robotics, AI, and web technologies.
+    Here you'll find my projects, notes, and contact info – I'd be happy to connect!
 
 ru:
   metadata:
     title: "Егор Макаренко"
     description: >-
-      Добро пожаловать на личный сайт Егора Макаренко, увлеченного разработчика программного обеспечения.
-      Ознакомьтесь с моими проектами, узнайте о моих навыках и свяжитесь со мной через социальные сети.
+      Личный сайт Егора Макаренко, разработчика программного обеспечения
+      с опытом в компьютерном зрении, робототехнике, ИИ и веб-технологиях.
+      Ознакомьтесь с моими проектами, узнайте о моих навыках и свяжитесь со мной
+      через социальные сети.
   name: "Егор Макаренко"
-  professional_title: "Разработчик ПО"
+  professional_title: "Инженер-программист"
   intro: >-
-    Добро пожаловать на мой личный сайт! Здесь вы можете найти информацию обо мне,
-    моих проектах и способах связи. Не стесняйтесь исследовать и связываться со мной
-    через предоставленные социальные сети.
-
-en_alt: >-
-  Hello! I'm Egor, a passionate software engineer with a love for creating
-  innovative solutions. With a strong background in web development and a keen
-  eye for detail, I strive to build applications that are not only functional
-  but also user-friendly. My journey in the tech world has been fueled by
-  curiosity and a desire to continuously learn and grow. When I'm not coding,
-  you can find me exploring new technologies, contributing to open-source
-  projects, or sharing my knowledge through blogging. Let's connect and create
-  something amazing together!
+    Привет! Я Егор, занимаюсь разработкой программного обеспечения.
+    Люблю создавать эффективные и надёжные системы для решения сложных задач.
+    В сфере моих интересов — машинное зрение, робототехника, ИИ, веб-технологии.
+    На сайте собраны мои проекты, заметки и способы связи — буду рад знакомству!
 
 sections:
   - id: social-links
@@ -125,7 +120,7 @@ export const Photo = ({ className, ...props }) => {
 </div>
 
 <div className="mx-auto prose p-5">
-  <p>{frontmatter[props.locale].intro}</p>
+  <p dangerouslySetInnerHTML={{ __html: frontmatter[props.locale].intro }}></p>
 
   {frontmatter.sections.map((section) => (
     <details
@@ -146,8 +141,8 @@ export const Photo = ({ className, ...props }) => {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="daisy-btn daisy-btn-ghost daisy-btn-block justify-start px-2">
-              <FontAwesomeIcon {...link.logo} size="2xl" widthAuto />
+              className="daisy-btn daisy-btn-ghost daisy-btn-block justify-start px-2 gap-2">
+              <FontAwesomeIcon {...link.logo} size="2xl" />
               <div className="flex flex-col leading-tight text-start">
                 <h5 className="font-semibold">{link.name}</h5>
                 <span className="text-base-content/70">
