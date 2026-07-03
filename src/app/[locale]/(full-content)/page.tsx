@@ -6,7 +6,7 @@ import { getLocaleFromParams } from "@/i18n/request";
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   const locale = getLocaleFromParams(await params);
-  const frontmatterMetadata = frontmatter.metadata[locale];
+  const frontmatterMetadata = frontmatter[locale].metadata;
 
   return {
     title: {

@@ -1,38 +1,39 @@
 ---
-metadata:
-  en:
+en:
+  metadata:
     title: "Egor Makarenko"
     description: >-
       Welcome to the personal website of Egor Makarenko, a passionate software engineer.
       Explore my projects, learn about my skills, and connect with me through social links.
-  ru:
+  name: "Egor Makarenko"
+  professional_title: "Software Engineer"
+  intro: >-
+    Welcome to my personal website! Here you can find information about me,
+    my projects, and how to get in touch. Feel free to explore and connect with me
+    through the provided social links.
+
+ru:
+  metadata:
     title: "Егор Макаренко"
     description: >-
       Добро пожаловать на личный сайт Егора Макаренко, увлеченного разработчика программного обеспечения.
       Ознакомьтесь с моими проектами, узнайте о моих навыках и свяжитесь со мной через социальные сети.
-name: { en: "Egor Makarenko", ru: "Егор Макаренко" }
-professional_title: { en: "Software Engineer", ru: "Разработчик ПО" }
-photo_alt:
-  en: "Egor Makarenko, Software Engineer"
-  ru: "Егор Макаренко, Разработчик ПО"
-intro:
-  en: >-
-    Welcome to my personal website! Here you can find information about me,
-    my projects, and how to get in touch. Feel free to explore and connect with me
-    through the provided social links.
-  ru: >-
+  name: "Егор Макаренко"
+  professional_title: "Разработчик ПО"
+  intro: >-
     Добро пожаловать на мой личный сайт! Здесь вы можете найти информацию обо мне,
     моих проектах и способах связи. Не стесняйтесь исследовать и связываться со мной
     через предоставленные социальные сети.
-  en_alt: >-
-    Hello! I'm Egor, a passionate software engineer with a love for creating
-    innovative solutions. With a strong background in web development and a keen
-    eye for detail, I strive to build applications that are not only functional
-    but also user-friendly. My journey in the tech world has been fueled by
-    curiosity and a desire to continuously learn and grow. When I'm not coding,
-    you can find me exploring new technologies, contributing to open-source
-    projects, or sharing my knowledge through blogging. Let's connect and create
-    something amazing together!
+
+en_alt: >-
+  Hello! I'm Egor, a passionate software engineer with a love for creating
+  innovative solutions. With a strong background in web development and a keen
+  eye for detail, I strive to build applications that are not only functional
+  but also user-friendly. My journey in the tech world has been fueled by
+  curiosity and a desire to continuously learn and grow. When I'm not coding,
+  you can find me exploring new technologies, contributing to open-source
+  projects, or sharing my knowledge through blogging. Let's connect and create
+  something amazing together!
 
 sections:
   - id: social-links
@@ -106,25 +107,25 @@ export const Photo = ({ className, ...props }) => {
     <Photo 
       width={150}
       height={150}
-      alt={frontmatter.photo_alt[props.locale]}
+      alt={frontmatter[props.locale].name}
       fetchPriority="high"
       placeholder="blur"
       className="aspect-square max-w-sm rounded-full shadow-lg border-4 border-base-200 object-cover" />
     <div className="p-2 xs:p-4 text-center lg:text-start">
       <h1 className="text-2xl xs:text-3xl md:text-4xl font-bold">
         <ViewTransition name="name" share="morph">
-          <span>{frontmatter.name[props.locale]}</span>
+          <span>{frontmatter[props.locale].name}</span>
         </ViewTransition>
       </h1>
       <h2 className="text-xl xs:text-2xl text-base-content/70">
-        {frontmatter.professional_title[props.locale]}
+        {frontmatter[props.locale].professional_title}
       </h2>
     </div>
   </div>
 </div>
 
 <div className="mx-auto prose p-5">
-  <p>{frontmatter.intro[props.locale]}</p>
+  <p>{frontmatter[props.locale].intro}</p>
 
   {frontmatter.sections.map((section) => (
     <details
