@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 
 import { getLocaleFromParams } from "@/i18n/request";
 
-export async function generateMetadata({ params }: any): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale?: string }> }): Promise<Metadata> {
   const locale = getLocaleFromParams(await params);
   const frontmatterMetadata = frontmatter[locale].metadata;
 

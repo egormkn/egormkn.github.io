@@ -20,13 +20,13 @@ function getPdfFallbackUrls(
   const fallbackUrls = [];
 
   if (options.parseUserAgent) {
-    const { browser, engine } = UAParser();
+    const { browser, engine, device } = UAParser();
     const browserVersion = semver.coerce(browser.version) ?? "0";
     const engineVersion = semver.coerce(engine.version) ?? "0";
 
     const isSupportedBrowser =
-      (engine.is(EngineName.BLINK) && semver.satisfies(engineVersion, ">=125")) ||
-      (engine.is(EngineName.GECKO) && semver.satisfies(engineVersion, ">=140"));
+      ((engine.is(EngineName.BLINK) && semver.satisfies(engineVersion, ">=125")) ||
+      (engine.is(EngineName.GECKO) && semver.satisfies(engineVersion, ">=140"))) && device.type === undefined;
 
     if (
       isSupportedBrowser

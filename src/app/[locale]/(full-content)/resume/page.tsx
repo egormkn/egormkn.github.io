@@ -15,8 +15,8 @@ export default function Page() {
   return (
     <>
       <PdfViewer title={title} url={url} htmlUrl={htmlUrl} className="w-full grow" />
-      <div className="daisy-fab">
-        <Link href={url} target="_blank" className="daisy-btn daisy-btn-error bg-[#A31719] text-white">
+      <div className="absolute bottom-8 right-8 z-50">
+        <Link href={url} target="_blank" className="daisy-btn bg-red-800 text-white border-red-900 hover:bg-red-700 shadow-md shadow-red-700/50">
           <FontAwesomeIcon icon={faFileArrowDown} /> Download PDF
         </Link>
       </div>
