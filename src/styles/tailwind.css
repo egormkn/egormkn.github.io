@@ -2,6 +2,7 @@
 
 @theme {
   --aspect-a4: 1 / 1.4142;
+  --breakpoint-xs: 30rem;
 }
 
 @plugin "@tailwindcss/forms";

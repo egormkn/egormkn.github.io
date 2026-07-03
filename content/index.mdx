@@ -102,7 +102,7 @@ export const Photo = ({ className, ...props }) => {
 
 
 <div className="daisy-hero">
-  <div className="daisy-hero-content mt-20 mb-5 flex-col p-6 lg:flex-row">
+  <div className="daisy-hero-content flex-col p-6 lg:flex-row lg:pt-15">
     <Photo 
       width={150}
       height={150}
@@ -110,20 +110,20 @@ export const Photo = ({ className, ...props }) => {
       fetchPriority="high"
       placeholder="blur"
       className="aspect-square max-w-sm rounded-full shadow-lg border-4 border-base-200 object-cover" />
-    <div className="p-4 text-center lg:text-start">
-      <h1 className="text-5xl font-bold">
+    <div className="p-2 xs:p-4 text-center lg:text-start">
+      <h1 className="text-2xl xs:text-3xl md:text-4xl font-bold">
         <ViewTransition name="name" share="morph">
           <span>{frontmatter.name[props.locale]}</span>
         </ViewTransition>
       </h1>
-      <h2 className="text-2xl text-base-content/70">
+      <h2 className="text-xl xs:text-2xl text-base-content/70">
         {frontmatter.professional_title[props.locale]}
       </h2>
     </div>
   </div>
 </div>
 
-<div className="mx-auto prose mb-5">
+<div className="mx-auto prose p-5">
   <p>{frontmatter.intro[props.locale]}</p>
 
   {frontmatter.sections.map((section) => (
@@ -138,11 +138,16 @@ export const Photo = ({ className, ...props }) => {
       </summary>
       <div className="daisy-collapse-content">
         
-        <div className="flex flex-col lg:flex-row gap-4 lg:flex-wrap">
+        <div className="xs:columns-2">
           {section.links.map((link) => (
-            <Link href={link.url} target="_blank" rel="noopener noreferrer" key={link.id} className="daisy-btn daisy-btn-ghost text-start flex px-2">
+            <Link
+              key={link.id}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="daisy-btn daisy-btn-ghost daisy-btn-block justify-start px-2">
               <FontAwesomeIcon {...link.logo} size="2xl" widthAuto />
-              <div className="flex flex-col leading-tight">
+              <div className="flex flex-col leading-tight text-start">
                 <h5 className="font-semibold">{link.name}</h5>
                 <span className="text-base-content/70">
                   {link.username}
