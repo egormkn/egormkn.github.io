@@ -40,5 +40,8 @@
       "default": "Личный сайт"
     },
     "description": ""
+  },
+  "Projects": {
+    "Under construction": "В разработке"
   }
 }

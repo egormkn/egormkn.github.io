@@ -39,5 +39,8 @@
       "default": "Personal website"
     },
     "description": ""
+  },
+  "Projects": {
+    "Under construction": "Under construction"
   }
 }
