@@ -13,10 +13,10 @@ export default function Header({ fullWidth }: { fullWidth?: boolean }) {
   const t = useTranslations("Header");
 
   return (
-    <header className="sticky top-0 z-30 bg-base-100 shadow-sm backdrop-blur print:static">
+    <header className="sticky top-0 z-30 bg-base-100/70 shadow-sm backdrop-blur print:static">
       <div className={clsx("daisy-navbar", !fullWidth && "container mx-auto")}>
         <div className="daisy-navbar-start">
-          <div className="group daisy-dropdown lg:hidden">
+          <div className="group daisy-dropdown md:hidden">
             <div
               title={t("menu")}
               tabIndex={0}
@@ -35,7 +35,7 @@ export default function Header({ fullWidth }: { fullWidth?: boolean }) {
 
           <HeaderHomeLink />
         </div>
-        <div className="daisy-navbar-center hidden lg:flex">
+        <div className="daisy-navbar-center hidden md:flex">
           <Menu type="horizontal" className="daisy-menu daisy-menu-horizontal px-1" />
         </div>
         <div className="daisy-navbar-end gap-1">
