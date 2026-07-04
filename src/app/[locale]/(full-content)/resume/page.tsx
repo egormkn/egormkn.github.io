@@ -15,8 +15,13 @@ export default function Page() {
   return (
     <>
       <PdfViewer title={title} url={url} htmlUrl={htmlUrl} className="w-full grow" />
-      <div className="absolute bottom-8 right-8 z-50">
-        <Link href={url} target="_blank" className="daisy-btn bg-red-800 text-white border-red-900 hover:bg-red-700 shadow-md shadow-red-700/50">
+      <div className="absolute right-8 bottom-8 z-50">
+        <Link
+          href={url}
+          target="_blank"
+          className="daisy-btn border-red-900 bg-red-800 text-white shadow-md shadow-red-700/50 hover:bg-red-700"
+          data-umami-event="Download resume"
+        >
           <FontAwesomeIcon icon={faFileArrowDown} /> Download PDF
         </Link>
       </div>

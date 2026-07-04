@@ -1,5 +1,6 @@
 "use client"
 
+import Script from 'next/script';
 import { useEffect } from 'react';
 
 export default function RootScripts() {
@@ -11,5 +12,15 @@ export default function RootScripts() {
     })
   }, []);
 
-  return null;
+  return (
+    <Script
+      async
+      src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL}
+      data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+      data-domains={process.env.NEXT_PUBLIC_UMAMI_DOMAINS}
+      data-performance={process.env.NEXT_PUBLIC_UMAMI_PERFORMANCE}
+      data-do-not-track={process.env.NEXT_PUBLIC_UMAMI_DO_NOT_TRACK}
+      strategy="afterInteractive"
+    />
+  );
 }

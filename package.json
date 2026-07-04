@@ -52,6 +52,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/semver": "^7.7.1",
+    "@types/umami-browser": "^2.18.1",
     "babel-plugin-react-compiler": "1.0.0",
     "daisyui": "^5.5.23",
     "eslint": "^9",
