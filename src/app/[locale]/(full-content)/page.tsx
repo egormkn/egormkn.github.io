@@ -1,4 +1,4 @@
-import Content, { frontmatter } from "@content/index.mdx";
+import MDXContent, { frontmatter } from "@content/index.mdx";
 import type { Metadata } from "next";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -20,5 +20,5 @@ export default function Page() {
   const locale = useLocale();
   const t = useTranslations("Home");
 
-  return <Content locale={locale} t={t} />;
+  return <MDXContent locale={locale} t={t} />;
 }

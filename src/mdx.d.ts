@@ -10,4 +10,8 @@ declare module "*.mdx" {
   export interface MDXProps {
     locale: Locale;
   }
+
+  import type { ComponentType } from 'react'
+  const Component: ComponentType<any>
+  export default Component
 }

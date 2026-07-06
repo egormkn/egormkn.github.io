@@ -17,7 +17,7 @@ import type {
   PagefindSearchbox,
   PagefindSummary,
 } from "@pagefind/component-ui";
-import "@pagefind/component-ui/css";
+import "@pagefind/component-ui/css/pagefind-component-ui.css";
 import Script from "next/script";
 import { createContext, useContext, useState } from "react";
 

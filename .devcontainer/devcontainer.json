@@ -10,7 +10,7 @@
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/node:2": {
-      "version": "lts"
+      "version": "26"
     },
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.14",
