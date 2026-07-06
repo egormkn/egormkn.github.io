@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "pagefind",
+    "postbuild": "./scripts/download-static-assets.sh && pagefind",
     "start": "next start",
     "lint": "eslint",
     "serve": "npm run build && npx serve out"
