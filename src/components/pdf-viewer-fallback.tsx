@@ -1,5 +1,6 @@
 "use client";
 
+import { BASE_URL } from "@/config";
 import { useEffect, useState } from "react";
 import semver from "semver";
 import { UAParser } from "ua-parser-js";
@@ -44,7 +45,7 @@ function getPdfFallbackUrls(
   if (htmlUrl) fallbackUrls.push(htmlUrl);
 
   if (url.startsWith("/")) {
-    url = `${process.env.NEXT_PUBLIC_URL}${url}`;
+    url = `${BASE_URL}${url}`;
   }
 
   fallbackUrls.push(`${options.googleViewerUrl}${encodeURIComponent(url)}`);

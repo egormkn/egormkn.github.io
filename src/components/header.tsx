@@ -8,6 +8,7 @@ import ThemeSwitcher from "@/components/theme-switcher";
 
 import HeaderHomeLink from "./header-home-link";
 import Menu from "./menu";
+import SearchButton from "./search-button";
 
 export default function Header({ fullWidth }: { fullWidth?: boolean }) {
   const t = useTranslations("Header");
@@ -39,6 +40,7 @@ export default function Header({ fullWidth }: { fullWidth?: boolean }) {
           <Menu type="horizontal" className="daisy-menu daisy-menu-horizontal px-1" />
         </div>
         <div className="daisy-navbar-end gap-1">
+          <SearchButton />
           <ThemeSwitcher />
           <LocaleSwitcher />
         </div>

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 function Post({ ...props }) {
   return (
-    <div key={props.slug} className="daisy-card w-96 bg-base-100 shadow-sm">
+    <div key={props.slug} className="daisy-card w-96 bg-base-100 shadow-sm" data-pagefind-ignore>
       <div className="daisy-card-body">
         <Link href={`/blog/${props.slug}`} className="daisy-card-title">
           {props.title}

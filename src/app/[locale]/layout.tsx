@@ -31,10 +31,13 @@ export async function generateStaticParams() {
 }
 
 export default async function Layout({ children, params }: LayoutProps<"/"> | LayoutProps<"/[locale]">) {
+  const resolvedParams = await params;
   const locale = getLocaleFromParams(await params);
 
+  const isExplicitEnLocale = "locale" in resolvedParams && resolvedParams.locale === "en";
+
   return (
-    <RootLayout lang={locale}>
+    <RootLayout lang={locale} data-pagefind-ignore={isExplicitEnLocale ? "all" : undefined}>
       <I18nRedirect />
       {children}
     </RootLayout>

@@ -1,0 +1,166 @@
+'use client';
+
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import * as PF from '@pagefind/component-ui';
+// import { getInstanceManager } from '../core/instance-manager';
+// import {
+//   parseKeyBinding,
+//   keyBindingMatches,
+//   getShortcutDisplay,
+//   type KeyBinding,
+// } from '../core/keyboard-shortcuts';
+
+export interface PagefindModalTriggerProps {
+  /** Instance name, defaults to 'default' */
+  instance?: string;
+  /** Placeholder text for the button */
+  placeholder?: string;
+  /** Keyboard shortcut, e.g., 'mod+k' */
+  shortcut?: string;
+  /** Whether to hide the shortcut key display */
+  hideShortcut?: boolean;
+  /** Compact mode (icon only) */
+  compact?: boolean;
+  /** Additional CSS class names */
+  className?: string;
+}
+
+/**
+ * React component that replicates the `<pagefind-modal-trigger>` custom element.
+ * Opens the Pagefind modal on click or via keyboard shortcut.
+ */
+export const PagefindModalTrigger: React.FC<PagefindModalTriggerProps> = ({
+  instance = 'default',
+  placeholder: userPlaceholder,
+  shortcut = 'mod+k',
+  hideShortcut = false,
+  compact = false,
+  className = '',
+}) => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [keyBinding, setKeyBinding] = useState<KeyBinding | null>(null);
+  const [displayShortcut, setDisplayShortcut] = useState<{ aria: string; keys: string[] } | null>(null);
+
+  // Get the Pagefind instance
+
+  // Resolve placeholder with translation fallback
+  const resolvedPlaceholder =
+    userPlaceholder ?? 'Search';
+
+  const t = PF.getInstanceManager;
+
+  // Parse keyboard shortcut and display info
+  useEffect(() => {
+    const binding = parseKeyBinding(shortcut);
+    setKeyBinding(binding);
+    if (binding) {
+      setDisplayShortcut(getShortcutDisplay(binding));
+    } else {
+      setDisplayShortcut(null);
+    }
+  }, [shortcut]);
+
+  // Open the modal
+  const openModal = useCallback(() => {
+  const pagefindInstance = PF.getInstanceManager().getInstance(instance);
+    const modals = pagefindInstance?.getUtilities?.('modal') as
+      | { open?: () => void; dialogEl?: HTMLDialogElement }[]
+      | undefined;
+    const modal = modals?.[0];
+    if (modal && typeof modal.open === 'function') {
+      modal.open();
+      setIsExpanded(true);
+    } else {
+      // Fallback: try to find the modal element directly
+      const modalEl = document.querySelector<HTMLElement & { open?: () => void }>(
+        `pagefind-modal[instance="${instance}"]`
+      ) ?? document.querySelector<HTMLElement & { open?: () => void }>('pagefind-modal');
+      if (modalEl && typeof modalEl.open === 'function') {
+        modalEl.open();
+        setIsExpanded(true);
+      } else {
+        console.warn('Pagefind modal not found');
+      }
+    }
+  }, [instance]);
+
+  // Global keyboard shortcut listener
+  useEffect(() => {
+    if (!keyBinding) return;
+
+    const handler = (e: KeyboardEvent) => {
+      if (!keyBindingMatches(keyBinding, e)) return;
+
+      const activeEl = document.activeElement as HTMLElement | null;
+      const isTyping =
+        activeEl &&
+        (activeEl.tagName === 'INPUT' ||
+          activeEl.tagName === 'TEXTAREA' ||
+          activeEl.isContentEditable);
+
+      if (!isTyping) {
+        e.preventDefault();
+        openModal();
+      }
+    };
+
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [keyBinding, openModal]);
+
+  // Listen to modal close events to update button state and focus
+  useEffect(() => {
+    const modalEl = document.querySelector<HTMLElement & { addEventListener?: (event: string, listener: EventListener) => void }>(
+      `pagefind-modal[instance="${instance}"]`
+    ) ?? document.querySelector<HTMLElement & { addEventListener?: (event: string, listener: EventListener) => void }>(
+      'pagefind-modal'
+    );
+
+    if (!modalEl) return;
+
+    const handleClose = () => {
+      setIsExpanded(false);
+      // Focus the button after modal closes
+      buttonRef.current?.focus();
+    };
+
+    modalEl.addEventListener?.('close', handleClose);
+    return () => modalEl.removeEventListener?.('close', handleClose);
+  }, [instance]);
+
+  // Build button classes
+  const buttonClasses = ['pf-trigger-btn', className].filter(Boolean).join(' ');
+
+  return (
+    <button
+      ref={buttonRef}
+      type="button"
+      className={buttonClasses}
+      aria-haspopup="dialog"
+      aria-expanded={isExpanded}
+      aria-label={resolvedPlaceholder}
+      aria-keyshortcuts={displayShortcut?.aria ?? ''}
+      onClick={openModal}
+    >
+      {/* Icon */}
+      <span className="pf-trigger-icon" aria-hidden="true" />
+
+      {/* Text (hidden in compact mode) */}
+      {!compact && <span className="pf-trigger-text">{resolvedPlaceholder}</span>}
+
+      {/* Shortcut display */}
+      {!hideShortcut && displayShortcut && (
+        <span className="pf-trigger-shortcut" aria-hidden="true">
+          {displayShortcut.keys.map((keyText, index) => (
+            <span key={index} className="pf-trigger-key">
+              {keyText}
+            </span>
+          ))}
+        </span>
+      )}
+    </button>
+  );
+};
+
+export default PagefindModalTrigger;
